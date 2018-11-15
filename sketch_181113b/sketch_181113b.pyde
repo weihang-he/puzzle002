@@ -9,16 +9,29 @@ class Tile:
         self.img = loadImage(path + "images/" + str(self.v)+".png")
 
     def display(self):
-        image(self.img, self.c * 200, self.r * 200)
+        if self.v != 15:
+            image(self.img, self.c * 200, self.r * 200)
+            noFill()
+            stroke(0)
+            strokeWeight(5)
+            rect(self.c * 200, self.r * 200, 200, 200)
+        
+        
         
 def setup():
     size(800,800)
     background(0)
 
-t0 = Tile(0,0,0)
-t1 = Tile(0,1,1)
-
+tiles = []
+cnt = 0
+for r in range(4):
+    for c in range(4):
+        tiles.append(Tile(r,c,cnt))
+        cnt += 1
+        
 def draw():
-    t0.display()
-    t1.display()
+    for t in tiles:
+        t.display()
+    
+    
     
