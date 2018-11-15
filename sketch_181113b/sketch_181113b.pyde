@@ -40,7 +40,29 @@ class Puzzle:
     def clicked(self):
         r = mouseY//200
         c = mouseX//200
+        t = self.getTile(r,c)
+        for n in [[-1,0], [1,0], [0,-1], [0,1]]:
+            nT = self.getTile(r+n[0], c+n[1])
+            if nT != False and nT.v == 15:
+                self.swapTiles(t, nT)
         
+        
+    def getTile(self,r,c):
+        for t in self.tiles:
+            if t.r == r and t.c == c:
+                return t
+        return False
+           
+    def swapTiles(self,t1, t2):
+        tmp1 = t1.v
+        tmp2 = t1.img
+        t1.v = t2.v
+        t1.img = t2.img
+        t2.v = tmp1
+        t2.img = tmp2
+        
+          
+                        
 p = Puzzle(4,4)        
 
 def setup():
@@ -51,7 +73,8 @@ def draw():
     background(0)
     p.display()
 
-# def mouseClicked():
+def mouseClicked():
+    p.clicked()
    
     
     
